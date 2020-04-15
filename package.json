@@ -22,10 +22,12 @@
   "dependencies": {
     "jot": "https://github.com/prk3/jot.git",
     "loglevel": "^1.6.8",
-    "react": "^16.13.1",
     "sundae-collab-shared": "https://github.com/prk3/sundae-collab-shared.git",
     "sundae-collab-client": "https://github.com/prk3/sundae-collab-client.git",
     "typescript": "^3.8.3"
+  },
+  "peerDependencies": {
+    "react": ">16.8.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.34",
