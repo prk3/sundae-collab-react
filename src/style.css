@@ -1,0 +1,72 @@
+
+.multi-cursor-text {
+  position: relative;
+}
+
+.multi-cursor-text__edit-area,
+.multi-cursor-text__cursor-area {
+  padding: 0;
+  margin: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: 13px;
+  font-family: sans-serif;
+  padding: 4px 6px;
+}
+
+.multi-cursor-text__edit-area {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  caret-color: transparent;
+
+  background-color: transparent;
+  resize: none;
+}
+
+.multi-cursor-text__edit-area::selection {
+  color: inherit;
+  background-color: inherit;
+}
+
+.multi-cursor-text__cursor-area {
+  border: 1px solid transparent;
+  border-radius: 3px;
+  color: transparent;
+}
+
+.multi-cursor-text__range {
+  /* the same text wrapping as in textarea */
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+
+.multi-cursor-text__caret {
+  position: relative;
+  margin: 0 -1px;
+  background-color: currentColor;
+  border-left: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  49.9% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  99.9% {
+    opacity: 0;
+  }
+}

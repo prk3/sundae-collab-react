@@ -1,0 +1,41 @@
+{
+  "name": "sundae-collab-react",
+  "version": "0.1.0",
+  "description": "React components for sundae collaboration.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "eslint --ext .ts,.tsx index.ts src/"
+  },
+  "author": {
+    "name": "prk3",
+    "email": "kukulski.przemyslaw@gmail.com",
+    "url:": "https://prk3.github.io/"
+  },
+  "license": "GPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prk3/sundae-collab-react.git"
+  },
+  "dependencies": {
+    "jot": "https://github.com/prk3/jot.git",
+    "loglevel": "^1.6.8",
+    "react": "^16.13.1",
+    "sundae-collab-shared": "https://github.com/prk3/sundae-collab-shared.git",
+    "sundae-collab-client": "https://github.com/prk3/sundae-collab-client.git",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.34",
+    "@typescript-eslint/eslint-plugin": "^2.28.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0"
+  }
+}

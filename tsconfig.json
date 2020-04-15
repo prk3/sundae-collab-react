@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
+    "noEmitOnError": true,
+    "outDir": "dist",
+    "declaration": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "jsx": "react",
+  },
+  "include": [
+    "index.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "files": [
+    "src/declarations.d.ts"
+  ]
+}
