@@ -1,3 +1,8 @@
+/*
+ * This file contains styles of MultiCursorText component.
+ * If your build system allows css imports, add this import to your project:
+ * import 'sundae-collab-react/style.css';
+ */
 
 .multi-cursor-text {
   position: relative;

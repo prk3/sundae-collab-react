@@ -6,7 +6,6 @@ import React, {
 } from 'react';
 import { Change, Range } from './TextField';
 import changeFromEvent from './utils/changeFromEvent';
-import './style.css';
 
 /**
  * Range + cursor integer.

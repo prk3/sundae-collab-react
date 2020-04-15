@@ -62,6 +62,7 @@ Child props:
 - onSelectionChange - A function taking new a selection passing it to the session. It accepts a null (when deleting selection) or an object with start and end numbers.
 
 Because building a custom text component with multi cursor support is difficult, this package includes one, ready to use text component.
+You must import `style.css` file in your project if you use `MultiCursorText`.
 
 ### `MultiCursorText`
 
