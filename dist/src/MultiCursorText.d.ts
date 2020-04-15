@@ -1,6 +1,5 @@
 import { TextareaHTMLAttributes } from 'react';
 import { Change, Range } from './TextField';
-import './style.css';
 /**
  * Range + cursor integer.
  */
