@@ -10,7 +10,7 @@ sundae-collab-react enables you to add sundae collaboration to a React applicati
 Wraps your pages. Adds collaboration client context to the React element tree.
 
 Props:
-- url - url string of the [sundae-collab-server](https://github.com/prk3/sundae-collab-server) instance. Probably starts with `ws://` or `wss://`.
+- url - url string of the [sundae-collab-server](https://github.com/prk3/sundae-collab-server) instance. Starts with `ws://` or `wss://` and does *not* end with a slash.
 - identity - Identity used for client authentication. Data of any JSON compatible shape.
 
 ### `Resource` component
