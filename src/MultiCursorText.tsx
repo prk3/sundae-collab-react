@@ -1,8 +1,5 @@
-// turns one line into 5
-/* eslint-disable react/jsx-one-expression-per-line */
-
 import React, {
-  useRef, TextareaHTMLAttributes, useEffect,
+  useRef, TextareaHTMLAttributes,
 } from 'react';
 import { Change, Range } from './TextField';
 import changeFromEvent from './utils/changeFromEvent';
@@ -205,7 +202,12 @@ function renderCursorAreaContent(props: Props) {
 
     if (shouldBreak) {
       // use zero width space character to force non-zero height
-      divs.push(<div key={uniqueKey()}>&#8203;{chunks}</div>);
+      divs.push(
+        <div key={uniqueKey()}>
+          <span className="multi-cursor-text__expander">&#8203;</span>
+          {chunks}
+        </div>,
+      );
       chunks = [];
     }
 
@@ -218,7 +220,12 @@ function renderCursorAreaContent(props: Props) {
   // use zero width space character to force non-zero height
   const lastFragment = value.slice(lastCutPosition).replace('\n', '');
   const lastChunk = renderRange(lastFragment, [], props);
-  divs.push(<div key={uniqueKey()}>&#8203;{[...chunks, lastChunk]}</div>);
+  divs.push(
+    <div key={uniqueKey()}>
+      <span className="multi-cursor-text__expander">&#8203;</span>
+      {[...chunks, lastChunk]}
+    </div>,
+  );
 
   // return all "paragraphs"
   return divs;
@@ -234,7 +241,6 @@ function renderCursorAreaContent(props: Props) {
  */
 export default function MultiCursorText(props: Props) {
   const editArea = useRef<HTMLTextAreaElement>(null);
-  const cursorBox = useRef<HTMLDivElement>(null);
 
   const {
     value,
@@ -296,13 +302,23 @@ export default function MultiCursorText(props: Props) {
     }
   }
 
-  // when a cursor data changes, update real textarea selection
+  // Side effects like selection change should happen in useEffect.
+  // However, because useEffect is not called early enough, events
+  // like mousemove run before it and override fresh selection changes.
+  // Updating the selection directly in render function fixes the issue.
+  if (editArea.current) {
+    editArea.current.selectionStart = cursors[userCursor]?.start ?? 0;
+    editArea.current.selectionEnd = cursors[userCursor]?.end ?? 0;
+  }
+
+  /*
   useEffect(() => {
     if (editArea.current) {
       editArea.current.selectionStart = cursors[userCursor]?.start ?? 0;
       editArea.current.selectionEnd = cursors[userCursor]?.end ?? 0;
     }
   }, [cursors, userCursor]);
+  */
 
   return (
     <div className="multi-cursor-text">
@@ -316,10 +332,7 @@ export default function MultiCursorText(props: Props) {
         onSelect={handleSelect}
         onBlur={handleSelect}
       />
-      <div
-        className="multi-cursor-text__cursor-area"
-        ref={cursorBox}
-      >
+      <div className="multi-cursor-text__cursor-area">
         {renderCursorAreaContent(props)}
       </div>
     </div>

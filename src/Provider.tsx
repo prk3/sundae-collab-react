@@ -21,7 +21,8 @@ export default function Provider({ url, identity, children }: Props) {
   const [client, setClient] = useState<Client | null>(null);
 
   useEffect(() => {
-    const localClient = new Client(url, identity);
+    const socket = new WebSocket(`${url}/`);
+    const localClient = new Client(socket, identity);
     setClient(localClient);
     return () => localClient.stop();
   }, [identity, url]);

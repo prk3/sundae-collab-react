@@ -1,6 +1,6 @@
 {
   "name": "sundae-collab-react",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "React components for sundae collaboration.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,10 +20,10 @@
     "url": "https://github.com/prk3/sundae-collab-react.git"
   },
   "dependencies": {
-    "jot": "https://github.com/prk3/jot.git",
+    "jot": "git+https://github.com/prk3/jot.git",
     "loglevel": "^1.6.8",
     "sundae-collab-client": "git+https://github.com/prk3/sundae-collab-client.git",
-    "sundae-collab-shared": "https://github.com/prk3/sundae-collab-shared.git",
+    "sundae-collab-shared": "git+https://github.com/prk3/sundae-collab-shared.git",
     "typescript": "^3.8.3"
   },
   "peerDependencies": {

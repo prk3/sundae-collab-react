@@ -50,6 +50,10 @@
   overflow-wrap: break-word;
 }
 
+.multi-cursor-text__expander {
+  white-space: nowrap;
+}
+
 .multi-cursor-text__caret {
   position: relative;
   margin: 0 -1px;

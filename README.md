@@ -97,7 +97,7 @@ Builds client code to `dist` directory.
 
 Builds client code to `dist` directory. Runs compiler again if the code changes.
 
-### `npm run list`
+### `npm run lint`
 
 Lints source files.
 

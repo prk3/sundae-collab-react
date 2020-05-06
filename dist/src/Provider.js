@@ -22,7 +22,8 @@ function Provider(_a) {
     var url = _a.url, identity = _a.identity, children = _a.children;
     var _b = react_1.useState(null), client = _b[0], setClient = _b[1];
     react_1.useEffect(function () {
-        var localClient = new sundae_collab_client_1.Client(url, identity);
+        var socket = new WebSocket(url + "/");
+        var localClient = new sundae_collab_client_1.Client(socket, identity);
         setClient(localClient);
         return function () { return localClient.stop(); };
     }, [identity, url]);

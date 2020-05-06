@@ -1,6 +1,4 @@
 "use strict";
-// turns one line into 5
-/* eslint-disable react/jsx-one-expression-per-line */
 var __spreadArrays = (this && this.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
     for (var r = Array(s), k = 0, i = 0; i < il; i++)
@@ -156,7 +154,7 @@ function renderCursorAreaContent(props) {
         if (shouldBreak) {
             // use zero width space character to force non-zero height
             divs.push(react_1.default.createElement("div", { key: uniqueKey() },
-                "\u200B",
+                react_1.default.createElement("span", { className: "multi-cursor-text__expander" }, "\u200B"),
                 chunks));
             chunks = [];
         }
@@ -169,7 +167,7 @@ function renderCursorAreaContent(props) {
     var lastFragment = value.slice(lastCutPosition).replace('\n', '');
     var lastChunk = renderRange(lastFragment, [], props);
     divs.push(react_1.default.createElement("div", { key: uniqueKey() },
-        "\u200B", __spreadArrays(chunks, [lastChunk])));
+        react_1.default.createElement("span", { className: "multi-cursor-text__expander" }, "\u200B"), __spreadArrays(chunks, [lastChunk])));
     // return all "paragraphs"
     return divs;
 }
@@ -182,8 +180,8 @@ function renderCursorAreaContent(props) {
  *   line breaks are replaced with div wrapping.
  */
 function MultiCursorText(props) {
+    var _a, _b, _c, _d;
     var editArea = react_1.useRef(null);
-    var cursorBox = react_1.useRef(null);
     var value = props.value, cursors = props.cursors, userCursor = props.userCursor, onChange = props.onChange, onSelectionChange = props.onSelectionChange;
     // The real select event is not emitted "on mouse up" and we have to rely on
     // many other events. This function checks if update is necessary before
@@ -233,17 +231,25 @@ function MultiCursorText(props) {
             });
         }
     }
-    // when a cursor data changes, update real textarea selection
-    react_1.useEffect(function () {
-        var _a, _b, _c, _d;
-        if (editArea.current) {
-            editArea.current.selectionStart = (_b = (_a = cursors[userCursor]) === null || _a === void 0 ? void 0 : _a.start) !== null && _b !== void 0 ? _b : 0;
-            editArea.current.selectionEnd = (_d = (_c = cursors[userCursor]) === null || _c === void 0 ? void 0 : _c.end) !== null && _d !== void 0 ? _d : 0;
-        }
+    // Side effects like selection change should happen in useEffect.
+    // However, because useEffect is not called early enough, events
+    // like mousemove run before it and override fresh selection changes.
+    // Updating the selection directly in render function fixes the issue.
+    if (editArea.current) {
+        editArea.current.selectionStart = (_b = (_a = cursors[userCursor]) === null || _a === void 0 ? void 0 : _a.start) !== null && _b !== void 0 ? _b : 0;
+        editArea.current.selectionEnd = (_d = (_c = cursors[userCursor]) === null || _c === void 0 ? void 0 : _c.end) !== null && _d !== void 0 ? _d : 0;
+    }
+    /*
+    useEffect(() => {
+      if (editArea.current) {
+        editArea.current.selectionStart = cursors[userCursor]?.start ?? 0;
+        editArea.current.selectionEnd = cursors[userCursor]?.end ?? 0;
+      }
     }, [cursors, userCursor]);
+    */
     return (react_1.default.createElement("div", { className: "multi-cursor-text" },
         react_1.default.createElement("textarea", { className: "multi-cursor-text__edit-area", ref: editArea, value: value, onChange: handleInput, onMouseDown: handleSelect, onMouseMove: handleSelect, onSelect: handleSelect, onBlur: handleSelect }),
-        react_1.default.createElement("div", { className: "multi-cursor-text__cursor-area", ref: cursorBox }, renderCursorAreaContent(props))));
+        react_1.default.createElement("div", { className: "multi-cursor-text__cursor-area" }, renderCursorAreaContent(props))));
 }
 exports.default = MultiCursorText;
 //# sourceMappingURL=MultiCursorText.js.map
